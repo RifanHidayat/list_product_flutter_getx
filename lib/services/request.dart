@@ -3,9 +3,8 @@ import 'package:http/http.dart' as http;
 class Request {
   late final String url;
   late final dynamic body;
-  late final String token;
 
-  Request({required this.url, this.body, required this.token});
+  Request({required this.url, this.body});
 
   Future<http.Response> get() async {
     return await http.get(Uri.parse(url), headers: {
