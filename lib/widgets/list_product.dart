@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:list_product/assets/colors.dart';
 import 'package:list_product/assets/fonts.dart';
 import 'package:list_product/assets/size.dart';
@@ -13,6 +14,7 @@ import 'package:list_product/widgets/text_label.dart';
 class ListProduct extends StatelessWidget {
   ProductModel product;
   ListProduct({super.key, required this.product});
+  var currencyFormat = new NumberFormat.currency(locale: "en_US", symbol: "\$");
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +40,22 @@ class ListProduct extends StatelessWidget {
                   height: SizeApp.height / 4 - 20,
                   width: SizeApp.width / 2 - 40,
                   decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(product.image),
-                          fit: BoxFit.cover)),
+                    color: ColorsApp.white,
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    image: DecorationImage(
+                      colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(0.2), BlendMode.dstATop),
+                      image: new NetworkImage(product.image.toString()),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(15),
+                    child: TextLabel(
+                      text: "${currencyFormat.format(product.rating!.count)}",
+                      font: FontsApp.interSemibold,
+                    ),
+                  ),
                 ),
               ),
               Expanded(
