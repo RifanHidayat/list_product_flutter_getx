@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:list_product/assets/colors.dart';
 import 'package:list_product/assets/fonts.dart';
 import 'package:list_product/assets/size.dart';
 import 'package:list_product/models/product.dart';
+import 'package:list_product/views/photo.dart';
 import 'package:list_product/widgets/rich_text_label.dart';
 import 'package:list_product/widgets/text_label.dart';
 
@@ -26,12 +28,20 @@ class ListProduct extends StatelessWidget {
           height: SizeApp.height / 4 - 20,
           child: Row(
             children: [
-              Container(
-                height: SizeApp.height / 4 - 20,
-                width: SizeApp.width / 2 - 40,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(product.image), fit: BoxFit.cover)),
+              InkWell(
+                onTap: () {
+                  Get.to(PhotoPage(
+                    photo: product.image.toString(),
+                  ));
+                },
+                child: Container(
+                  height: SizeApp.height / 4 - 20,
+                  width: SizeApp.width / 2 - 40,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(product.image),
+                          fit: BoxFit.cover)),
+                ),
               ),
               Expanded(
                 child: Container(
