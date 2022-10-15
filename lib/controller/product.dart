@@ -23,15 +23,17 @@ class ProductController extends GetxController {
     );
     request.get().then((result) {
       var response = jsonDecode(result.body);
+      print(response);
 
       try {
-        if (response.statusCode == 200) {
+        if (result.statusCode == 200) {
           isLoading.value = false;
           products.value = ProductModel.fromJsonToList(response);
         } else {
           isLoading.value = false;
         }
       } catch (e) {
+        print(e.toString());
         isLoading.value = false;
       }
     });
